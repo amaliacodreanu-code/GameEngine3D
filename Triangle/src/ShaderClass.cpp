@@ -1,6 +1,6 @@
 #include"shaderClass.h"
 #include <stdlib.h>
-// Reads a text file and outputs a string with everything in the text file
+
 std::string get_file_contents(const char* filename)
 {
 	std::ifstream in(filename, std::ios::binary);
@@ -14,22 +14,22 @@ std::string get_file_contents(const char* filename)
 		in.close();
 		return(contents);
 	}
-	std::cout << "EROARE CRITICA: Nu s-a putut deschide fisierul: " << filename << std::endl;
-    return std::string(); // Returnează un string gol
+	std::cout << "error " << filename << std::endl;
+    return std::string(); 
 }
 
-// Constructor that build the Shader Program from 2 different shaders
+
 Shader::Shader(const char* vertexFile, const char* fragmentFile)
 {
-	// Read vertexFile and fragmentFile and store the strings
+	
 	std::string vertexCode = get_file_contents(vertexFile);
 	std::string fragmentCode = get_file_contents(fragmentFile);
 
-	// Convert the shader source strings into character arrays
+	
 	const char* vertexSource = vertexCode.c_str();
 	const char* fragmentSource = fragmentCode.c_str();
 
-	// Create Vertex Shader Object and get its reference
+	
 	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	// Attach Vertex Shader source to the Vertex Shader Object
 	glShaderSource(vertexShader, 1, &vertexSource, NULL);
@@ -76,9 +76,9 @@ void Shader::Delete()
 // Checks if the different Shaders have compiled properly
 void Shader::compileErrors(unsigned int shader, const char* type)
 {
-	// Stores status of compilation
+	
 	GLint hasCompiled;
-	// Character array to store error message in
+	
 	char infoLog[1024];
 	if (type != "PROGRAM")
 	{
@@ -87,10 +87,8 @@ void Shader::compileErrors(unsigned int shader, const char* type)
 {
     glGetShaderInfoLog(shader, 1024, NULL, infoLog);
     std::cout << "SHADER_COMPILATION_ERROR for:" << type << "\n" << infoLog << std::endl;
-
-    std::cout << "Apasa Enter pentru a iesi...";
     std::cin.get();
-    exit(EXIT_FAILURE); // <-- OPREȘTE PROGRAMUL
+    exit(EXIT_FAILURE); 
 }
 	}
 	else

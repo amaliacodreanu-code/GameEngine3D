@@ -41,11 +41,9 @@ Texture::Texture(const char* image, const char* texType, GLenum slot, GLenum for
        stbi_image_free(data);
     }
     else{
-        std::cout << "EROARE CRITICA: Textura nu a fost gasita la calea: " << image << std::endl;
-    std::cout << "Asigura-te ca ai scris calea corect." << std::endl;
-    std::cout << "Apasa Enter pentru a iesi...";
-    std::cin.get();
-    exit(EXIT_FAILURE); 
+        std::cout << "Textura nu a fost gasita la calea: " << image << std::endl;
+        std::cin.get();
+        exit(EXIT_FAILURE); 
     }
   
 
